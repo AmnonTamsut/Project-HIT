@@ -41,6 +41,7 @@ namespace Project_HIT.Screens
             update_grade_textbox = new System.Windows.Forms.TextBox();
             update_grade_button = new System.Windows.Forms.Button();
             logout = new System.Windows.Forms.Button();
+            errorlabelUpdater = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)ProfessorProfilePictue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Professor_signatue_picturebox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)schoolMainBindingSource).BeginInit();
@@ -140,6 +141,7 @@ namespace Project_HIT.Screens
             update_grade_textbox.Size = new System.Drawing.Size(270, 23);
             update_grade_textbox.TabIndex = 11;
             update_grade_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            update_grade_textbox.TextChanged += update_grade_textbox_TextChanged;
             // 
             // update_grade_button
             // 
@@ -161,11 +163,23 @@ namespace Project_HIT.Screens
             logout.UseVisualStyleBackColor = true;
             logout.Click += logout_Click;
             // 
+            // errorlabelUpdater
+            // 
+            errorlabelUpdater.AutoSize = true;
+            errorlabelUpdater.BackColor = System.Drawing.Color.Transparent;
+            errorlabelUpdater.ForeColor = System.Drawing.Color.IndianRed;
+            errorlabelUpdater.Location = new System.Drawing.Point(238, 235);
+            errorlabelUpdater.Name = "errorlabelUpdater";
+            errorlabelUpdater.Size = new System.Drawing.Size(71, 15);
+            errorlabelUpdater.TabIndex = 14;
+            errorlabelUpdater.Text = "יש למלא ציון";
+            // 
             // ProfessorForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(errorlabelUpdater);
             Controls.Add(logout);
             Controls.Add(update_grade_button);
             Controls.Add(update_grade_textbox);
@@ -199,5 +213,6 @@ namespace Project_HIT.Screens
         private System.Windows.Forms.TextBox update_grade_textbox;
         private System.Windows.Forms.Button update_grade_button;
         private System.Windows.Forms.Button logout;
+        private System.Windows.Forms.Label errorlabelUpdater;
     }
 }

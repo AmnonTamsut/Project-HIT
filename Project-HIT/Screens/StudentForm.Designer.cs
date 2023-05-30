@@ -37,6 +37,8 @@ namespace Project_HIT.Screens
             label1 = new System.Windows.Forms.Label();
             profilePicture = new System.Windows.Forms.PictureBox();
             logout = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            degreeLabelInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)signatue_picturebox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)profilePicture).BeginInit();
@@ -128,6 +130,25 @@ namespace Project_HIT.Screens
             logout.UseVisualStyleBackColor = true;
             logout.Click += logout_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(364, 91);
+            label2.Name = "label2";
+            label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            label2.Size = new System.Drawing.Size(37, 15);
+            label2.TabIndex = 8;
+            label2.Text = "תואר:";
+            // 
+            // degreeLabelInfo
+            // 
+            degreeLabelInfo.AutoSize = true;
+            degreeLabelInfo.Location = new System.Drawing.Point(287, 91);
+            degreeLabelInfo.Name = "degreeLabelInfo";
+            degreeLabelInfo.Size = new System.Drawing.Size(38, 15);
+            degreeLabelInfo.TabIndex = 9;
+            degreeLabelInfo.Text = "label3";
+            // 
             // StudentForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -135,6 +156,8 @@ namespace Project_HIT.Screens
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(degreeLabelInfo);
+            Controls.Add(label2);
             Controls.Add(logout);
             Controls.Add(profilePicture);
             Controls.Add(label1);
@@ -161,5 +184,7 @@ namespace Project_HIT.Screens
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox profilePicture;
         private System.Windows.Forms.Button logout;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label degreeLabelInfo;
     }
 }

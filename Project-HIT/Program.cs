@@ -16,7 +16,7 @@ namespace Project_HIT
 		{
 			SchoolMain hit = new SchoolMain();
 			
-
+			RememberMe i = new RememberMe();
 
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();

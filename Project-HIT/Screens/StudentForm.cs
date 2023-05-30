@@ -31,6 +31,7 @@ namespace Project_HIT.Screens
         private void StudentFormViewInit()
         {
             this.welcomeNameLabel.Text = "שלום: " + student.Name;
+            this.degreeLabelInfo.Text = student.D.Name;
             string fileName = student.Id.ToString();
             string workingDirectory = Environment.CurrentDirectory;
             string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources");
@@ -99,9 +100,24 @@ namespace Project_HIT.Screens
 
         private void logout_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.student.updateFiles();
+            this.back.deRemember();
+            this.back.Remembered = false;
+            this.signatue_picturebox.Image.Dispose();
+            this.Dispose();
+            this.Close();
             this.back.clearPassword();
             this.back.Show();
+        }
+
+        private void request_form_btn_Click(object sender, EventArgs e)
+        {
+            Request request = new Request();
+            RequestForm rForm = new RequestForm(this.student);
+
+            rForm.Show();
+
+
         }
     }
 }

@@ -9,13 +9,15 @@ using System.Xml.Linq;
 
 namespace Project_HIT
 {
+    [Serializable()]
+
     public class SchoolMain
     {
         //maps worker to worker id
-        Dictionary<Employee, int> workers;
+        Dictionary<int, Employee> workers;
 
         //maps students and their TZ
-        Dictionary<Student, int> students;
+        Dictionary<string,Student> students;
 
         //maps a user with it's password
         Dictionary<Person, string> users;
@@ -25,13 +27,15 @@ namespace Project_HIT
 
         Dictionary<string, List<Student>> studentsInCourse;
 
+        int numOfWorkers = 0;
 
-        internal Dictionary<Employee, int> Workers { get => workers; set => workers = value; }
-        internal Dictionary<Student, int> Students { get => students; set => students = value; }
+
+        internal Dictionary<int, Employee> Workers { get => workers; set => workers = value; }
+        internal Dictionary<string, Student> Students { get => students; set => students = value; }
         internal Dictionary<Person, string> Users { get => users; set => users = value; }
         internal List<Degree> Degrees { get => degrees; set => degrees = value; }
 
-        public SchoolMain(Dictionary<Employee, int> workers, Dictionary<Student, int> students, Dictionary<Person, string> users, List<Degree> degree)
+        public SchoolMain(Dictionary<int, Employee> workers, Dictionary<string, Student> students, Dictionary<Person, string> users, List<Degree> degree)
         {
             this.Workers = workers;
             this.Students = students;
@@ -41,8 +45,8 @@ namespace Project_HIT
         }
         public SchoolMain()
         {
-            this.Workers = new Dictionary<Employee, int>();
-            this.Students = new Dictionary<Student, int>();
+            this.Workers = new Dictionary<int, Employee>();
+            this.Students = new Dictionary<string,Student>();
             this.Users = new Dictionary<Person, string>();
             this.Degrees = new List<Degree>();
 
@@ -69,7 +73,33 @@ namespace Project_HIT
             path = Directory.GetParent(workingDirectory).Parent.Parent.FullName + filePathUsers + "Professors.csv";
 
             readProfessors(path);
+            path = Directory.GetParent(workingDirectory).Parent.Parent.FullName + filePathUsers + "Minhala.csv";
+            readMinhala(path);
             
+
+
+        }
+
+        private void readMinhala(string path)
+        {
+            
+
+            if (File.Exists(path))
+            {
+
+
+                var dict = File.ReadLines(path).Select(line => line.Split(',')).ToArray();
+                foreach (string[] arr in dict)
+                {
+                    var x = new MinhalaEmployee(this);
+                    x.Name = arr[0];
+                    x.Id = Int32.Parse(arr[1]);
+                    x.workerId = ++this.numOfWorkers;
+                    this.users.Add(x, arr[2]);
+                    this.workers.Add(this.numOfWorkers, x);
+                }
+            }
+            else { File.Create(path); }
         }
 
         public void readProfessors(string path)
@@ -92,6 +122,10 @@ namespace Project_HIT
                     var x = new Professor(profCourses, proffStudents);
                     x.Name = arr[0];
                     x.Id = Int32.Parse(arr[1]);
+                    x.workerId = ++this.numOfWorkers;
+
+                    this.workers.Add(this.numOfWorkers, x);
+
 
                     this.users.Add(x, arr[2]);
                 }
@@ -100,7 +134,10 @@ namespace Project_HIT
 
         }
 
-
+        public Degree getDegreeByName(string name) 
+        {
+            foreach(Degree d in this.Degrees) { if (d.Name.Equals(name)) return d; } return null;
+        }
 
         public void readStudents(string path, Degree degree)
         {
@@ -114,7 +151,9 @@ namespace Project_HIT
                     x.Name = arr[0];
                     x.D = degree;
                     x.Id = Int32.Parse(arr[1]);
+                    x.updateFiles();
 
+                    this.Students.Add(arr[1],x);
                     this.users.Add(x, arr[2]);
                 }
             }
@@ -172,5 +211,12 @@ namespace Project_HIT
             return null;
         }
 
+    
+        public void addUser(Person person, string pass) 
+        {
+
+            this.users.Add(person, pass);
+
+        }
     }
 }

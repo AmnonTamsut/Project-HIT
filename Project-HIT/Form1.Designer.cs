@@ -36,6 +36,7 @@ namespace Project_HIT
             id_data = new System.Windows.Forms.TextBox();
             login_send = new System.Windows.Forms.Button();
             password_text = new System.Windows.Forms.Panel();
+            rememberMeCheckBox = new System.Windows.Forms.CheckBox();
             label1 = new System.Windows.Forms.Label();
             ID_text = new System.Windows.Forms.Label();
             clear_btn = new System.Windows.Forms.Button();
@@ -77,6 +78,7 @@ namespace Project_HIT
             // 
             // password_text
             // 
+            password_text.Controls.Add(rememberMeCheckBox);
             password_text.Controls.Add(label1);
             password_text.Controls.Add(ID_text);
             password_text.Controls.Add(clear_btn);
@@ -85,6 +87,19 @@ namespace Project_HIT
             password_text.Size = new System.Drawing.Size(427, 298);
             password_text.TabIndex = 15;
             password_text.Paint += panel1_Paint;
+            // 
+            // rememberMeCheckBox
+            // 
+            rememberMeCheckBox.AutoSize = true;
+            rememberMeCheckBox.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            rememberMeCheckBox.Location = new System.Drawing.Point(78, 267);
+            rememberMeCheckBox.Name = "rememberMeCheckBox";
+            rememberMeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            rememberMeCheckBox.Size = new System.Drawing.Size(73, 19);
+            rememberMeCheckBox.TabIndex = 3;
+            rememberMeCheckBox.Text = "זכור אותי";
+            rememberMeCheckBox.UseVisualStyleBackColor = true;
+            rememberMeCheckBox.CheckedChanged += rememberMeCheckBox_CheckedChanged;
             // 
             // label1
             // 
@@ -135,6 +150,7 @@ namespace Project_HIT
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            Shown += Form1_Shown;
             password_text.ResumeLayout(false);
             password_text.PerformLayout();
             ResumeLayout(false);
@@ -152,6 +168,7 @@ namespace Project_HIT
         private System.Windows.Forms.Button clear_btn;
         private System.Windows.Forms.Label ID_text;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox rememberMeCheckBox;
     }
 }
 

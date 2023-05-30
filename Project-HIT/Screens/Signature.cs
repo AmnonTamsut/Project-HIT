@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Project_HIT.Screens
 {
@@ -26,6 +27,8 @@ namespace Project_HIT.Screens
 		}
 		string id;
 		Graphics graphics;
+		Bitmap bitmapLastUsed = new Bitmap(1,1);
+		
 		
 		List<Line> lines;
 		public Signature(Person p)
@@ -39,9 +42,10 @@ namespace Project_HIT.Screens
 			string workingDirectory = Environment.CurrentDirectory;
 			string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Signatures\\");
 
-			
-			
-		}
+         
+
+
+        }
 
 
 		
@@ -87,6 +91,7 @@ namespace Project_HIT.Screens
 
 		public void SignatureToPicture()
 		{
+			this.bitmapLastUsed.Dispose();
 			Bitmap bmp = new Bitmap(panel1.Width, panel1.Height);
 
 			string fileName = this.id.ToString();
@@ -94,13 +99,16 @@ namespace Project_HIT.Screens
 			string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Signatures", fileName + ".bmp");
 			Graphics g = Graphics.FromImage(bmp);
 			g.Clear(Color.White);
+
 			foreach (Line l in this.lines)
 			{
 				g.DrawLine(Pens.Blue, l.x, l.y, l.endX, l.endY);
 			}
-		
+			
 			bmp.Save(path);
-			bmp.Dispose();
+			this.bitmapLastUsed = bmp;
+
+            bmp.Dispose();
 			g.Dispose();
 
 
@@ -111,13 +119,14 @@ namespace Project_HIT.Screens
 		{
 			SignatureToPicture();
 			
-			this.Hide();
+			this.Close();
 
 		}
 
 		private void clear_btn_Click(object sender, EventArgs e)
 		{
 			this.graphics.Clear(Color.White);
+			this.lines.Clear();
 		}
 
 		

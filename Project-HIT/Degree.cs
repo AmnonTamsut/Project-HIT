@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace Project_HIT
 {
-	 public class Degree
+    [Serializable()]
+
+    public class Degree
 	{
 		string name;
 		int pointsNeeded;

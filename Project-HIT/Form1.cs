@@ -9,12 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Project_HIT.Screens;
 using Project_HIT;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Project_HIT
 {
+    [Serializable()]
+
     public partial class Form1 : Form
     {
+
         private SchoolMain school;
+        bool remembered = false;
+
+        public bool Remembered { get => remembered; set => remembered = value; }
+
         public Form1(SchoolMain school)
         {
             InitializeComponent();
@@ -24,17 +34,30 @@ namespace Project_HIT
 
         }
 
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            string workingDirectory = Environment.CurrentDirectory;
+            string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Serialization\\data.hit");
 
-            ////comboBox1_test1_dictionary.DataSource = new BindingSource(this.school.Degrees[0].Courses, null);
-            ////comboBox1_test1_dictionary.ValueMember = "Value";
-            ////comboBox1_test1_dictionary.DisplayMember = "Key";
-            //Professor f = new Professor(this.school.Degrees[0].Courses.Keys.ToList(), null);
+            if (File.Exists(path))
+            {
+                IFormatter formatter = new BinaryFormatter();
 
-            //Form x = new ProfessorForm(f, this);
-            //x.Show();
+                Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                RememberMe i = (RememberMe)formatter.Deserialize(stream);
+                if (i.AskedToBeRemembered)
+                {
+                    this.remembered = true;
+                    i.P.OpenForm(this);
+                    //(this.school.findUserById(int.Parse(i.Id),i.Pass)).OpenForm(this);
+                }
+                stream.Close();
+            }
+
         }
+
 
         private void login_panel_Paint(object sender, PaintEventArgs e)
         {
@@ -74,7 +97,7 @@ namespace Project_HIT
             this.password_data.Clear();
 
         }
-        public void clearPassword() 
+        public void clearPassword()
         {
             this.password_data.Clear();
 
@@ -83,8 +106,23 @@ namespace Project_HIT
         private void login_send_Click(object sender, EventArgs e)
         {
             Person p;
+            if (this.rememberMeCheckBox.Checked && school.findUserById(int.Parse(this.id_data.Text), this.password_data.Text) != null)
+            {
+                RememberMe i = new RememberMe();
+                this.remembered = true;
+                i.AskedToBeRemembered = true;
+                string workingDirectory = Environment.CurrentDirectory;
+                string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Serialization\\data.hit");
+                i.P = school.findUserById(int.Parse(this.id_data.Text), this.password_data.Text);
+                i.Id = this.id_data.Text;
+                i.Pass = this.password_data.Text;
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
+                formatter.Serialize(stream, i);
+                stream.Close();
+            }
+
             p = school.findUserById(int.Parse(this.id_data.Text), this.password_data.Text);
-            Form formX;
             if (p == null)
             {
                 MessageBox.Show("שם משתמש או סיסמא לא תקינים");
@@ -92,28 +130,19 @@ namespace Project_HIT
             }
             else
             {
-                if (p is Student)
-                {
-                    formX = new StudentForm((Student)p, this);
-                    formX.Show();
-                    this.Hide();
-                }
-                else if (p is Professor)
-                {
-                    formX = new ProfessorForm((Professor)p, this);
-                    formX.Show();
-                    this.Hide();
-
-                }
-                else if (p is MinhalaEmployee)
-                {
-                    formX = new MihalaForm((MinhalaEmployee)p);
-                    formX.Show();
-                    this.Hide();
-
-                }
+                p.OpenForm(this);
+                this.Hide();
 
             }
+        }
+
+        public void deRemember()
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Serialization\\data.hit");
+
+            File.Delete(path);
+            this.Remembered = false;
         }
 
         private void id_login_text_TextChanged(object sender, EventArgs e)
@@ -128,6 +157,21 @@ namespace Project_HIT
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void rememberMeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+
+            if (this.Remembered)
+            {
+                this.Hide();
+            }
 
         }
     }

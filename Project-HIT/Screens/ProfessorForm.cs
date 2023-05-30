@@ -31,8 +31,12 @@ namespace Project_HIT.Screens
 
         }
 
+
+
+
         private void ProfessorForm_Load(object sender, EventArgs e)
         {
+            errorlabelUpdater.Hide();
             ProfessorFormInit();
             this.update_grade_button.Hide();
             this.update_grade_text.Hide();
@@ -48,8 +52,6 @@ namespace Project_HIT.Screens
             students_grades_view.Hide();
 
 
-            //this.students_grades_view.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            //this.students_grades_view.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             ListViewItem x;
 
 
@@ -63,6 +65,37 @@ namespace Project_HIT.Screens
             this.professor_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.professor_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
+            populateCourses();
+            /*
+            //foreach (string c in this.Professor.Courses)
+            //{
+            //    int counter = 0;
+            //    float courseAvg = 0;
+
+            //    if (this.Professor.MyStudents != null)
+            //    {
+            //        foreach (Student student in this.Professor.MyStudents)
+            //        {
+            //            studentByName.Add(student.Name, student);
+
+            //            if (student.takesCourse(c)) counter++;
+            //            courseAvg += student.Grades[c];
+            //        }
+            //        courseAvg = courseAvg / counter;
+            //        x = new ListViewItem(new string[] { c, counter.ToString(), courseAvg.ToString() });
+                    
+            //        this.professor_list.Items.Add(x);
+
+            //    }
+            //}
+            */
+            this.professor_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.professor_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+        private void populateCourses()
+        {
+            ListViewItem x;
+            this.professor_list.Items.Clear();
             foreach (string c in this.Professor.Courses)
             {
                 int counter = 0;
@@ -72,23 +105,23 @@ namespace Project_HIT.Screens
                 {
                     foreach (Student student in this.Professor.MyStudents)
                     {
-                        studentByName.Add(student.Name, student);
 
+                        if (!(studentByName.ContainsKey(student.Name)))
+                        {
+                            studentByName.Add(student.Name, student);
+                        }
                         if (student.takesCourse(c)) counter++;
                         courseAvg += student.Grades[c];
                     }
+                    courseAvg = courseAvg / counter;
                     x = new ListViewItem(new string[] { c, counter.ToString(), courseAvg.ToString() });
-                    //x.SubItems[0].Text = c;
-                    //x.SubItems[1].Text = counter.ToString();
-                    //x.SubItems[2].Text = courseAvg.ToString();
 
                     this.professor_list.Items.Add(x);
 
                 }
             }
-            this.professor_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.professor_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
+
 
         private void ProfessorFormInit()
         {
@@ -124,6 +157,7 @@ namespace Project_HIT.Screens
             this.back_to_courses_label.Show();
             this.professor_list.Hide();
             this.students_grades_view.Show();
+            
 
             UpdateGradesInCourse();
 
@@ -181,6 +215,7 @@ namespace Project_HIT.Screens
 
         private void back_to_courses_label_Click(object sender, EventArgs e)
         {
+            populateCourses();
             this.students_grades_view.Hide();
 
             this.professor_list.Show();
@@ -197,7 +232,9 @@ namespace Project_HIT.Screens
         {
             if (this.students_grades_view.SelectedItems.Count > 0)
             {
+                this.back_to_courses_label.Hide();
                 this.temp = this.students_grades_view.SelectedItems[0];
+                this.update_grade_textbox.Clear();
                 this.students_grades_view.Hide();
                 this.update_grade_button.Show();
                 this.update_grade_text.Show();
@@ -220,26 +257,40 @@ namespace Project_HIT.Screens
                 this.update_grade_button.Hide();
                 this.update_grade_text.Hide();
                 this.update_grade_textbox.Hide();
+
+                foreach (Student s in this.Professor.MyStudents) s.updateFiles();
+
             }
         }
 
         private void updateStudentInGradeList(Student student, string course, string grade)
         {
-            student.Grades[course] = Int32.Parse(grade);
+            if (string.IsNullOrEmpty(grade)) { }
+            else
+            {
+                student.Grades[course] = Int32.Parse(grade);
+            }
         }
 
         private void update_grade_button_Click(object sender, EventArgs e)
         {
-            this.updateGradesWasClicked = true;
-            gradeUpdater(this.temp);
-            this.updateGradesWasClicked = false;
-
+            if (string.IsNullOrEmpty(this.update_grade_textbox.Text)) { errorlabelUpdater.Show(); }
+            else
+            {
+                this.updateGradesWasClicked = true;
+                gradeUpdater(this.temp);
+                this.updateGradesWasClicked = false;
+            }
         }
 
         private void logout_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
+            this.Professor_signatue_picturebox.Image.Dispose();
+            this.Close();
             this.back.clearPassword();
+            this.back.deRemember();
+
 
             this.back.Show();
         }
@@ -247,6 +298,11 @@ namespace Project_HIT.Screens
         private void ProfessorProfilePictue_Click(object sender, EventArgs e)
         {
             this.Professor.UploadProfilePicture("\\Resources\\ProfilePictures\\", this.ProfessorProfilePictue);
+        }
+
+        private void update_grade_textbox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
