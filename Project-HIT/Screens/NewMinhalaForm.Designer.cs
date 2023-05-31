@@ -150,6 +150,7 @@
             Controls.Add(nameLabel);
             Name = "NewMinhalaForm";
             Text = "NewMinhalaForm";
+            Load += NewMinhalaForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

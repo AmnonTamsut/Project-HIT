@@ -65,10 +65,17 @@ namespace Project_HIT.Screens
                 this.idTextBox.Text = temp.Id.ToString();
                 this.salaryTextBox.Text = temp.salary.ToString();
                 this.employeeWokerId.Text = this.workerList.SelectedItems[0].Text;
-                
+
+                if (this.signaturPictureBox.Image != null)
+                {
+                    this.signaturPictureBox.Image.Dispose();
+
+                }
+
+                this.profilePictureBox.Image.Dispose();
                 temp.ProfilePictureInit(profilePicturePath, this.profilePictureBox);
                 temp.signatureInit(signaturePath, this.signaturPictureBox);
-                
+
             }
             else { return; }
         }
@@ -83,16 +90,8 @@ namespace Project_HIT.Screens
                 this.profilePictureBox.Image = Image.FromFile(this.profilePicPath);
 
 
-                //OpenFileDialog opnfd = new OpenFileDialog();
-                //opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;)|*.jpg;*.jpeg;.*.gif";
 
-                //if (opnfd.ShowDialog() == DialogResult.OK)
-                //{
-                //    this.profilePicPath = opnfd.FileName;
-                //    this.uploadedProfilePic = true;
-                //}
-                //this.profilePictureBox.Image = Image.FromFile(this.profilePicPath);
-               
+
 
 
             }
@@ -116,14 +115,14 @@ namespace Project_HIT.Screens
         {
             if (this.workerList.SelectedItems.Count > 0)
             {
-                }
-                int wId = Int32.Parse(this.workerList.SelectedItems[0].Text);
-                Employee temp = this.workers[wId];
-                temp.Name = this.nameTextBox.Text;
-                temp.salary = Int32.Parse(this.salaryTextBox.Text);
-                temp.Id = Int32.Parse(this.idTextBox.Text);
-                this.owner.Show();
-                this.Hide();
+            }
+            int wId = Int32.Parse(this.workerList.SelectedItems[0].Text);
+            Employee temp = this.workers[wId];
+            temp.Name = this.nameTextBox.Text;
+            temp.salary = Int32.Parse(this.salaryTextBox.Text);
+            temp.Id = Int32.Parse(this.idTextBox.Text);
+            this.owner.Show();
+            this.Hide();
             if (this.profilePicPath != null)
             {
 
@@ -131,11 +130,11 @@ namespace Project_HIT.Screens
                 string workingDirectory = Environment.CurrentDirectory;
                 string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\ProfilePictures\\");
                 this.profilePictureBox.Image.Dispose();
-                
+
                 this.profilePictureBox.Dispose();
                 this.workerList.Dispose();
 
-                
+
 
                 File.Copy(this.profilePicPath, path + fileName + ".bmp", true);
 
@@ -151,6 +150,11 @@ namespace Project_HIT.Screens
         {
             this.Hide();
             this.owner.Show();
+        }
+
+        private void ManageEmplyeesForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

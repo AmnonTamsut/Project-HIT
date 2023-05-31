@@ -122,6 +122,7 @@ namespace Project_HIT
             Controls.Add(name_label);
             Name = "MinhalaForm";
             Text = "Mihala";
+            Load += MinhalaForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

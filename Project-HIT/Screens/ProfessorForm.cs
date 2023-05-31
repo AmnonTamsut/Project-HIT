@@ -157,7 +157,7 @@ namespace Project_HIT.Screens
             this.back_to_courses_label.Show();
             this.professor_list.Hide();
             this.students_grades_view.Show();
-            
+
 
             UpdateGradesInCourse();
 
@@ -285,7 +285,7 @@ namespace Project_HIT.Screens
 
         private void logout_Click(object sender, EventArgs e)
         {
-            
+
             this.Professor_signatue_picturebox.Image.Dispose();
             this.Close();
             this.back.clearPassword();

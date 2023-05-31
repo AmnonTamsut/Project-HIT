@@ -12,24 +12,24 @@ namespace Project_HIT
     [Serializable()]
 
     public class MinhalaEmployee : Employee
-	{
-		SchoolMain school;
-	
-		public MinhalaEmployee(int salary, int workerId, SchoolMain school)
-		{
-			this.salary = salary;
-			this.workerId = workerId;
-			this.school = school;
-		}
+    {
+        SchoolMain school;
+
+        public MinhalaEmployee(int salary, int workerId, SchoolMain school)
+        {
+            this.salary = salary;
+            this.workerId = workerId;
+            this.school = school;
+        }
 
         public MinhalaEmployee(SchoolMain school)
         {
             this.salary = 0;
             this.workerId = 0;
-			this.school = school;
+            this.school = school;
         }
 
-        
+
 
         override public void OpenForm(Form1 owner)
         {
@@ -38,9 +38,9 @@ namespace Project_HIT
         }
 
         public void getAllStudentsForCourse(string course)
-		{
+        {
 
 
-		}
-	}
+        }
+    }
 }

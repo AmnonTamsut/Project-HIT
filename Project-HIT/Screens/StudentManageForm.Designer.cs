@@ -42,6 +42,7 @@
             profilePicBox = new System.Windows.Forms.PictureBox();
             label3 = new System.Windows.Forms.Label();
             signaturPictureBox = new System.Windows.Forms.PictureBox();
+            deleteBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)profilePicBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)signaturPictureBox).BeginInit();
             SuspendLayout();
@@ -49,11 +50,11 @@
             // studentsList
             // 
             studentsList.HideSelection = false;
-            studentsList.Location = new System.Drawing.Point(455, 60);
+            studentsList.Location = new System.Drawing.Point(429, 57);
             studentsList.Name = "studentsList";
             studentsList.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             studentsList.RightToLeftLayout = true;
-            studentsList.Size = new System.Drawing.Size(256, 293);
+            studentsList.Size = new System.Drawing.Size(346, 293);
             studentsList.TabIndex = 1;
             studentsList.UseCompatibleStateImageBehavior = false;
             studentsList.SelectedIndexChanged += studentsList_SelectedIndexChanged;
@@ -130,7 +131,7 @@
             doneBtn.Name = "doneBtn";
             doneBtn.Size = new System.Drawing.Size(75, 23);
             doneBtn.TabIndex = 9;
-            doneBtn.Text = "סיום";
+            doneBtn.Text = "שמירה";
             doneBtn.UseVisualStyleBackColor = true;
             doneBtn.Click += doneBtn_Click;
             // 
@@ -171,6 +172,7 @@
             // 
             // signaturPictureBox
             // 
+            signaturPictureBox.Image = (System.Drawing.Image)resources.GetObject("signaturPictureBox.Image");
             signaturPictureBox.Location = new System.Drawing.Point(30, 256);
             signaturPictureBox.Name = "signaturPictureBox";
             signaturPictureBox.Size = new System.Drawing.Size(174, 72);
@@ -178,11 +180,22 @@
             signaturPictureBox.TabIndex = 12;
             signaturPictureBox.TabStop = false;
             // 
+            // deleteBtn
+            // 
+            deleteBtn.Location = new System.Drawing.Point(267, 359);
+            deleteBtn.Name = "deleteBtn";
+            deleteBtn.Size = new System.Drawing.Size(96, 23);
+            deleteBtn.TabIndex = 14;
+            deleteBtn.Text = "מחיקה";
+            deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
+            // 
             // StudentManageForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(deleteBtn);
             Controls.Add(label3);
             Controls.Add(signaturPictureBox);
             Controls.Add(profilePicBox);
@@ -198,6 +211,7 @@
             Controls.Add(studentsList);
             Name = "StudentManageForm";
             Text = "StudentManageForm";
+            Load += StudentManageForm_Load;
             ((System.ComponentModel.ISupportInitialize)profilePicBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)signaturPictureBox).EndInit();
             ResumeLayout(false);
@@ -219,5 +233,6 @@
         private System.Windows.Forms.PictureBox profilePicBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox signaturPictureBox;
+        private System.Windows.Forms.Button deleteBtn;
     }
 }

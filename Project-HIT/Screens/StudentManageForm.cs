@@ -31,6 +31,8 @@ namespace Project_HIT.Screens
         private void init()
         {
             this.Show();
+
+
             this.errorLabel.Hide();
             this.studentsList.Columns.Add("תעודת זהות");
             this.studentsList.Columns.Add("שם");
@@ -45,10 +47,12 @@ namespace Project_HIT.Screens
 
 
             this.studentsList.View = View.Details;
+            this.studentsList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.studentsList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             this.studentsList.MultiSelect = false;
 
-            foreach(Degree d in this.degrees) { this.degreeNameMap.Add(d.Name, d); }    
+            foreach (Degree d in this.degrees) { this.degreeNameMap.Add(d.Name, d); }
 
         }
 
@@ -64,8 +68,8 @@ namespace Project_HIT.Screens
                 this.idTextBox.Text = studentId;
                 this.nameTextBox.Text = this.students[studentId].Name;
                 this.degreeCmb.Text = this.students[studentId].D.Name;
-                
-                if(this.signaturPictureBox.Image != null) 
+
+                if (this.signaturPictureBox.Image != null)
                 {
                     this.signaturPictureBox.Image.Dispose();
 
@@ -83,7 +87,7 @@ namespace Project_HIT.Screens
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             this.back.Show();
         }
 
@@ -138,7 +142,7 @@ namespace Project_HIT.Screens
 
                     File.Copy(this.profilePicPath, path + fileName + ".bmp", true);
                 }
-                
+
                 string studentID = this.studentsList.SelectedItems[0].Text;
                 this.students[studentID].Name = this.nameTextBox.Text;
 
@@ -147,11 +151,30 @@ namespace Project_HIT.Screens
                 this.Close();
                 this.back.Show();
             }
-            else 
+            else
             {
                 this.errorLabel.Show();
-                return; 
+                return;
             }
+
+        }
+
+        private void studentsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            string studentId = this.studentsList.SelectedItems[0].Text;
+
+
+            this.students.Remove(studentsList.SelectedItems[0].Text);
+            this.studentsList.Items.Remove(studentsList.SelectedItems[0]);
+        }
+
+        private void StudentManageForm_Load(object sender, EventArgs e)
+        {
 
         }
     }

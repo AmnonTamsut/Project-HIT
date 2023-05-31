@@ -36,7 +36,7 @@ namespace Project_HIT
 
             updateFiles();
 
-           
+
 
 
 
@@ -46,7 +46,7 @@ namespace Project_HIT
         {
             string fileName = this.Id.ToString();
             string workingDirectory = Environment.CurrentDirectory;
-            string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Grades\\"+ this.Name+ ".csv");
+            string path = System.IO.Path.Combine(Directory.GetParent(workingDirectory).Parent.Parent.FullName + "\\Resources\\Grades\\" + this.Name + ".csv");
 
 
             if (File.Exists(path))
@@ -54,10 +54,11 @@ namespace Project_HIT
                 var dict = File.ReadLines(path).Select(line => line.Split(',')).ToArray();
                 foreach (string[] arr in dict)
                 {
-                    if (this.Grades.ContainsKey(arr[0])) { 
-                    this.Grades[arr[0]] = Int32.Parse(arr[1]);
+                    if (this.Grades.ContainsKey(arr[0]))
+                    {
+                        this.Grades[arr[0]] = Int32.Parse(arr[1]);
                     }
-                    else 
+                    else
                     {
                         this.Grades.Add(arr[0], Int32.Parse(arr[1]));
 
@@ -67,7 +68,7 @@ namespace Project_HIT
 
             }
 
-            
+
         }
 
         override public void OpenForm(Form1 owner)
@@ -122,20 +123,20 @@ namespace Project_HIT
             path = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Resources\\Grades\\" + this.Name) + ".csv";
 
             //readGrades();
-            
+
 
             if (!File.Exists(path))
             {
 
-                
 
-                var x= File.Create(path);
+
+                var x = File.Create(path);
                 x.Dispose();
                 foreach (string c in d.Courses.Keys)
                 {
                     Grades.Add(c, 0);
-                    
-                    File.AppendAllLines(path,new string[] {c+","+"0"});
+
+                    File.AppendAllLines(path, new string[] { c + "," + "0" });
 
                 }
 

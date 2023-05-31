@@ -43,6 +43,7 @@ namespace Project_HIT.Screens
                 s.Id = Int32.Parse(this.idTextBox.Text);
 
                 this.school.addUser(s, this.passwordTextBox.Text);
+                this.school.Students.Add(s.Id.ToString(), s);
 
                 if (this.uploadedProfilePic)
                 {
@@ -76,6 +77,11 @@ namespace Project_HIT.Screens
         {
             this.Hide();
             this.backForm.Show();
+        }
+
+        private void NewStudentForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -97,5 +97,10 @@ namespace Project_HIT.Screens
             this.Close();
             this.back.Show();
         }
+
+        private void NewProfessorForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

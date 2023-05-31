@@ -73,6 +73,11 @@ namespace Project_HIT.Screens
             this.Hide();
             this.back.Show();
         }
+
+        private void NewMinhalaForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

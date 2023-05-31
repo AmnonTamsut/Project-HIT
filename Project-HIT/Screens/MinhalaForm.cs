@@ -26,7 +26,7 @@ namespace Project_HIT
             this.back = back;
         }
 
-        
+
         private void addStudentbtn_Click(object sender, EventArgs e)
         {
             Form newStudent = new NewStudentForm(this.School, this);
@@ -63,6 +63,11 @@ namespace Project_HIT
         {
             Form x = new StudentManageForm(this.School.Students, this, this.School.Degrees);
             this.Hide();
+        }
+
+        private void MinhalaForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

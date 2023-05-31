@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 
 
- 
+
 
 
 
@@ -20,9 +20,9 @@ abstract public class Person
     string profileImage = "Default_Profile.jpg";
     string name;
     string address;
-   
+
     bool hasSignature = false;
-    
+
 
 
     public int Id { get => id; set => id = value; }
@@ -31,7 +31,7 @@ abstract public class Person
     public string Name { get => name; set => name = value; }
     public string Address { get => address; set => address = value; }
     public bool HasSignature { get => hasSignature; set => hasSignature = value; }
-    
+
 
     public bool hasSignatureFile()
     {
@@ -49,7 +49,7 @@ abstract public class Person
     }
 
 
-    
+
 
     public void ProfilePictureInit(string path, PictureBox pb)
     {

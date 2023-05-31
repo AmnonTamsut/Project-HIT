@@ -177,6 +177,7 @@
             Controls.Add(label1);
             Name = "NewProfessorForm";
             Text = "NewProfessorForm";
+            Load += NewProfessorForm_Load;
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();

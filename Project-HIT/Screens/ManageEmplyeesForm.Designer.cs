@@ -218,6 +218,7 @@
             Controls.Add(workerList);
             Name = "ManageEmplyeesForm";
             Text = "ManageEmplyeesForm";
+            Load += ManageEmplyeesForm_Load;
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)signaturPictureBox).EndInit();
             ResumeLayout(false);

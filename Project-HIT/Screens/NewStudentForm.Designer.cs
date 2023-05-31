@@ -170,6 +170,7 @@
             Controls.Add(nameLabel);
             Name = "NewStudentForm";
             Text = "NewStudentForm";
+            Load += NewStudentForm_Load;
             ((System.ComponentModel.ISupportInitialize)profilePictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
