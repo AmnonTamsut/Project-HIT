@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net.Security;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_HIT.Screens
 {
@@ -280,6 +271,7 @@ namespace Project_HIT.Screens
                 this.updateGradesWasClicked = true;
                 gradeUpdater(this.temp);
                 this.updateGradesWasClicked = false;
+                this.back_to_courses_label.Show();
             }
         }
 
