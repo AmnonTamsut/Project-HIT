@@ -28,31 +28,6 @@
   <img src="https://i.imgur.com/oGhyHvy.png" alt="Image 3">
 </div>
 
-<style>
-#carousel {
-  display: flex;
-  overflow: hidden;
-  width: 300px;
-  height: 200px;
-  position: relative;
-}
-
-#carousel img {
-  min-width: 100%;
-  transition: transform 0.5s ease;
-}
-
-@keyframes slide {
-  0% { transform: translateX(0); }
-  33% { transform: translateX(-100%); }
-  66% { transform: translateX(-200%); }
-  100% { transform: translateX(0); }
-}
-
-#carousel {
-  animation: slide 9s infinite;
-}
-</style>
 
 
 #####  Table of Contents
