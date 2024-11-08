@@ -1,4 +1,4 @@
-<p align="center">
+<img width="847" alt="image" src="https://github.com/user-attachments/assets/625e4553-71bb-4fe6-b036-14fe0723961a"><p align="center">
 </p>
 <p align="center">
     <h1 align="center">PROJECT-HIT</h1>
@@ -18,7 +18,42 @@
 <p align="center">
 	</p>
 
-<br>
+<be>
+
+# Image Gallery
+
+<div id="carousel">
+  <img src="https://i.imgur.com/uRbmp7a.png" alt="Image 1">
+  <img src="https://i.imgur.com/EMmTHtu.png" alt="Image 2">
+  <img src="https://i.imgur.com/oGhyHvy.png" alt="Image 3">
+</div>
+
+<style>
+#carousel {
+  display: flex;
+  overflow: hidden;
+  width: 300px;
+  height: 200px;
+  position: relative;
+}
+
+#carousel img {
+  min-width: 100%;
+  transition: transform 0.5s ease;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  33% { transform: translateX(-100%); }
+  66% { transform: translateX(-200%); }
+  100% { transform: translateX(0); }
+}
+
+#carousel {
+  animation: slide 9s infinite;
+}
+</style>
+
 
 #####  Table of Contents
 
